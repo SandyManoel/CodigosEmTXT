@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace PTesteClasses
+{
+    class Mensalista : Empregado
+    {
+        public Double SalarioMensal { get; set; } //tem tudo que tem aqui e + o que tem no salariomensal
+        //ao inves de criar o atributo e propriedade da pra criar direto, mas dai não pode ficar colocando if outros codigos
+
+        public override double SalarioBruto() //nova versao do salario bruto virtual vira override
+        {
+            return SalarioMensal; //retorna o salario mensal
+        }
+
+        // construtor --> new
+        public Mensalista()
+        {
+            MessageBox.Show("Passei por Aqui");
+        }
+    
+        public Mensalista(double x)
+        {
+
+        }
+
+        public Mensalista(int matx, string nomex, DateTime datax, double salariox)
+        {
+            Matricula = matx;
+            NomeEmpregado = nomex;
+            DataEntradaEmpresa = datax;
+            SalarioMensal = salariox;
+        }
+
+    }
+}

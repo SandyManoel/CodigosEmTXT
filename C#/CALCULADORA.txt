@@ -1,0 +1,144 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Atividade2
+{
+    public partial class frmCalculadora : Form
+    {
+        public frmCalculadora()
+        {
+            InitializeComponent();
+        }
+
+        private void btnSoma_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double num1, num2;
+                lblOperacao.Text = "+";
+                num1 = double.Parse(txtNum1.Text);
+                num2 = double.Parse(txtNum2.Text);
+                txtResultado.Text = (num1 + num2).ToString();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Valores Inválidos, informe apenas números");
+                txtNum1.Clear();
+                txtNum2.Clear();
+                txtResultado.Clear();
+                lblOperacao.Text = "  ";
+                txtNum1.Focus();
+            }
+        }
+
+        private void btnSubtrair_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double num1, num2;
+                lblOperacao.Text = "-";
+                num1 = double.Parse(txtNum1.Text);
+                num2 = double.Parse(txtNum2.Text);
+                txtResultado.Text = (num1 - num2).ToString();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Valores Inválidos, informe apenas números");
+                txtNum1.Clear();
+                txtNum2.Clear();
+                txtResultado.Clear();
+                lblOperacao.Text = "  ";
+                txtNum1.Focus();
+            }
+        }
+
+        private void btnMultiplicar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double num1, num2;
+                lblOperacao.Text = "*";
+                num1 = double.Parse(txtNum1.Text);
+                num2 = double.Parse(txtNum2.Text);
+                txtResultado.Text = (num1 * num2).ToString();
+
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Valores Inválidos, informe apenas números");
+                txtNum1.Clear();
+                txtNum2.Clear();
+                txtResultado.Clear();
+                lblOperacao.Text = "  ";
+                txtNum1.Focus();
+            }
+        }
+
+        private void btnDividir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double num1, num2;
+                lblOperacao.Text = "/";
+                num1 = double.Parse(txtNum1.Text);
+                num2 = double.Parse(txtNum2.Text);
+                if (num2 != 0)
+                {
+                    txtResultado.Text = (num1 / num2).ToString();
+                }
+                else
+                {
+                 MessageBox.Show("Não é possível realizar divisão por zero");
+                    txtNum1.Clear();
+                    txtNum2.Clear();
+                    txtResultado.Clear();
+                    lblOperacao.Text = "  ";
+                    txtNum1.Focus();
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Valores Inválidos, informe apenas números");
+                txtNum1.Clear();
+                txtNum2.Clear();
+                txtResultado.Clear();
+                lblOperacao.Text = "  ";
+                txtNum1.Focus();
+            }
+            catch (DivideByZeroException)
+            {
+                MessageBox.Show("Não é possível realizar divisão por zero"); //tende ao infinito por ser real double
+            }
+        }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            txtNum1.Clear();
+            txtNum2.Clear();
+            txtResultado.Clear();
+            lblOperacao.Text = "  ";
+            txtNum1.Focus();
+        }
+
+        private void txtNum1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13) 
+            {
+                SendKeys.Send("{TAB}"); 
+                e.Handled = true; 
+            }
+        }
+    }
+}

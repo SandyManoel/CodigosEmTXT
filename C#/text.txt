@@ -1,0 +1,89 @@
+Susbstring peg parte 
+
+Criar um formulário
+Usar o componte RichTextBox (texto grande)
+
+Botão 1
+Vai pegar cada caracter e testar – é numero?
+If char.isnumber(_)
+Se for numero vai colocando no contador
+
+Segundo botão
+Veja se é espaço em branco encontrou espaço em branco saiu fora
+Pedindo para usar o método if(char.iswhitespace)
+
+Terceiro
+Ver quantas letras tem
+
+
+
+Exercicio 5 
+Random
+Validar para ver se é numero já que quando recebe é string
+Se o usuário colocar o primeiro numero maior que o segundo quebra o programa
+
+Try parse
+
+Random random = new random();
+Dour r = random.next(numero1,numero2)
+Messagebox ( o numero sorteado é)
+Dai faz mais um teste
+If numero1>num2{
+Invalido}
+
+
+VAI PEDIR OU VETOR OU MATRIZ NA AVALIAÇÃO
+6 EXERCICIOS
+COM EXCEÇÃO DO NOME PESSOAS
+BASTA CLICAR NO BOTAO  Q VAI MOSTRAR
+
+
+CRIA OUTRO FORMULARIO P FAZER O EXERCICIO 6.
+
+CRIE UMA MATRIZ P GUARDAR 3 NOTAS DE 20 ALUNOS
+
+Double[,] notas = new double[20,3];
+
+For(var aluno=0;aluno<20;aluno++){
+	For(var notas=0;notas<3;nota++){
+		Aux = Interaction.InputBox(“xx”,”yy”);
+		//valida 
+		If (!double.TryParse(aux,notas[aluno, nota]);{
+Message.Box
+Nota --;
+}
+Else
+Notas aluno está entre 0 e 10, se não não é valido
+
+Se não tiver le denovo
+
+Acumula em uma varia media depois divide 
+}
+}
+
+PARA USAR O INPUT BOX
+Project – adicionar referencia – Microsoft visual basic e coloca check e da ok
+Depois adiciona o using Microsoft.VisualBasic;
+
+Exercicio 6
+
+N – Quantidade pessoas
+Valor de caracter 
+
+Int[] vetor = newint[9];
+
+É para guardar o comprimento de cada nome no vetor só que tem que descontar 
+
+
+Jose da silva 
+
+Para desconsiderar espaços em branco
+Aux.length=13;
+Aux2=aux.Replace(“”); //tira espaço em branco 
+Ai ficaria 11
+
+
+
+Listbox
+COMO INSERE NO LISTBOX
+lstResultado.items.ADD(STRING)

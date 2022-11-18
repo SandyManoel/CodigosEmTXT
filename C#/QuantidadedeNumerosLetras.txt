@@ -1,0 +1,85 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace pMetodos2
+{
+    public partial class frmExercicio4 : Form
+    {
+        public frmExercicio4()
+        {
+            InitializeComponent();
+        }
+
+        private void btnQtdeNumeros_Click(object sender, EventArgs e)
+        {
+
+            string aux = rctxtTexto.Text;
+            int cont = 0;
+
+            int tamanho = rctxtTexto.TextLength;
+            for (var i = 0; i < tamanho; i++)
+            {
+                if (char.IsNumber(aux[i]))
+                {
+                    cont++;
+                }
+
+            }
+            MessageBox.Show("Tem " + cont.ToString() + " caracteres númericos no texto");
+        }
+
+
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            rctxtTexto.Clear();
+        }
+
+        private void btnEmBranco_Click(object sender, EventArgs e)
+        {
+            string aux = rctxtTexto.Text;
+
+            int i = 0;
+            int posicao = 0;
+
+
+            while (i < aux.Length)
+            {
+                if (!char.IsWhiteSpace(aux[i]))
+                {
+                    i++;
+                }
+                else
+                {
+                    posicao = i + 1;
+                    break;
+                }
+
+            }
+            MessageBox.Show("O espaço em branco está na " + posicao.ToString() + " ª posição");
+
+        }
+
+        private void btnQtdeAlfabeticos_Click(object sender, EventArgs e)
+        {
+            string aux = rctxtTexto.Text;
+            int cont=0;
+
+            foreach(char caracter in aux)
+            {
+                if (char.IsLetter(caracter))
+                {
+                    cont++;
+                }
+            }
+            MessageBox.Show("Tem " + cont.ToString()+ " caracteres alfábéticos no texto");
+        }
+    }
+}

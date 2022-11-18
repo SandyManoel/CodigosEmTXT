@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace pMetodos2
+{
+    public partial class frmExercicio3 : Form
+    {
+        public frmExercicio3()
+        {
+            InitializeComponent();
+        }
+
+        private void btnRemove1_Click(object sender, EventArgs e)
+        {
+
+            int posicao = 0;
+            int aux;
+            if (int.TryParse(txtPalavra1.Text, out aux) || (int.TryParse(txtPalavra2.Text, out aux)) || (txtPalavra1.Text == "") || (txtPalavra1.Text == ""))
+            {
+                MessageBox.Show("Digite as palavras! ");
+            }
+            else
+            {
+                txtPalavra1.Text = txtPalavra1.Text.ToUpper();
+                txtPalavra2.Text = txtPalavra2.Text.ToUpper();
+                posicao = txtPalavra2.Text.IndexOf(txtPalavra1.Text); //procura na palavra 2 o texto da palavra 1
+
+                while (posicao >= 0)//a busca do index of inicia em zero
+                {
+                        txtPalavra2.Text = txtPalavra2.Text.Substring(0, posicao) +  
+                        txtPalavra2.Text.Substring(posicao + txtPalavra1.Text.Length,
+                        txtPalavra2.Text.Length - posicao - txtPalavra1.Text.Length);
+
+                        posicao = txtPalavra2.Text.IndexOf(txtPalavra1.Text);      
+                }
+            }
+        }
+
+        private void btnRemove2_Click(object sender, EventArgs e)
+        {
+            int aux;
+            if (int.TryParse(txtPalavra1.Text, out aux) || (int.TryParse(txtPalavra2.Text, out aux)) || (txtPalavra1.Text == "") || (txtPalavra2.Text == ""))
+            {
+                MessageBox.Show("Digite uma palavra! ");
+            }
+            else
+            {
+                txtPalavra1.Text = txtPalavra1.Text.ToUpper();
+                txtPalavra2.Text = txtPalavra2.Text.ToUpper();
+                txtPalavra2.Text = txtPalavra2.Text.Replace(txtPalavra1.Text, "");
+            }
+        }
+
+        private void btnInverte_Click(object sender, EventArgs e)
+        {
+            int aux;
+            if (int.TryParse(txtPalavra1.Text, out aux) || (int.TryParse(txtPalavra2.Text, out aux)) || (txtPalavra1.Text == ""))
+            {
+                MessageBox.Show("Digite uma palavra! ");
+            }
+            else
+            {
+                string auxiliar = txtPalavra1.Text;
+                char[] arr = auxiliar.ToCharArray(); //jogo a string para um array (transforma a string para um array de char)
+                Array.Reverse(arr); //invertendo o array
+
+                auxiliar = "";
+                foreach (char caracter in arr) //nao precisa controlar posicao
+                {
+                    auxiliar += caracter.ToString(); //volta para string coloca tudo numa variavel auxiliar 
+                }
+               txtPalavra2.Text= auxiliar.ToString(); //imprime tudo
+            }
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            txtPalavra1.Text = "";
+            txtPalavra2.Text = "";
+        }
+    }
+}

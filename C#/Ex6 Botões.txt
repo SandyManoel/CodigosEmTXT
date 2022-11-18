@@ -1,0 +1,59 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Microsoft.VisualBasic;
+
+namespace PMatriz
+{
+    public partial class frmExercicio6 : Form
+    {
+        public frmExercicio6()
+        {
+            InitializeComponent();
+        }
+
+        private void btnExecutar_Click(object sender, EventArgs e)
+        {
+            
+            string auxiliar="", auxiliar2="";
+            int[] vetor = new int[10];
+            string[] vetorNomes = new string[10];
+
+            //0030482213011
+                for (var i = 0; i < 1; i++)
+                {
+                    auxiliar = Interaction.InputBox("Digite o nome: " + (i + 1), "Entrada de dados");
+                    
+
+                    if (int.TryParse(auxiliar, out vetor[i])) //se não conseguir converter então
+                    {
+                        MessageBox.Show("Valor inválido! ");
+                        i--; //volta uma posição porque deu valor invalido
+                    }
+                    else
+                    {
+                        vetorNomes[i] = auxiliar;
+                        auxiliar2 = vetorNomes[i].Replace(" ", "");
+                        vetor[i] = auxiliar2.Length; //desconta espaços em brancos                                   
+                        lstBoxNomes.Items.Add(vetorNomes[i] + " / Tamanho do nome: " + vetor[i]);
+                        /* Outra forma de fazer:
+                        auxiliar2 = auxiliar.Replace(" ", ""); 
+                        int tamanho = auxiliar2.Length; 
+                        lstBoxNomes.Items.Add(auxiliar + " / Tamanho do nome: " + auxiliar2);*/
+                }
+            }
+
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            lstBoxNomes.Items.Clear();
+        }
+    }
+}

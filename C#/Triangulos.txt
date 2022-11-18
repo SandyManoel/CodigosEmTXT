@@ -1,0 +1,82 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace PTriangulo
+{
+    public partial class frmTriangulos : Form
+    {
+        public frmTriangulos()
+        {
+            InitializeComponent();
+        }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            txtValorA.Clear();
+            txtValorB.Clear();
+            txtValorC.Clear();
+            txtTipoTriangulo.Clear();
+            chkBoxTriangulo.Checked=false;
+        }
+
+        private void btnValidar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double ladoA, ladoB, ladoC;
+                ladoA = double.Parse(txtValorA.Text);
+                ladoB = double.Parse(txtValorB.Text);
+                ladoC = double.Parse(txtValorC.Text);
+
+                if (ladoA < (ladoB + ladoC) && (ladoA>Math.Abs(ladoB-ladoC) && ladoB < (ladoA + ladoC) && ladoB > Math.Abs(ladoA - ladoC) && (ladoC < (ladoA + ladoB) && (ladoC > Math.Abs(ladoA - ladoB)))))
+                {
+                    chkBoxTriangulo.Checked=true;
+
+                    if ((ladoA ==ladoB) && (ladoA == ladoC) && (ladoB == ladoC))
+                    {
+                        txtTipoTriangulo.Text = "Equilátero"; 
+                    }
+
+                    else if ((ladoA == ladoB) || (ladoA==ladoC) || (ladoB==ladoC))
+                    {
+                        txtTipoTriangulo.Text = "Isósceles";
+                    }
+                    else if ((ladoA != ladoB) && (ladoA != ladoC) && (ladoB != ladoC))
+                    {
+                        txtTipoTriangulo.Text = "Escaleno";
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Não é um triângulo");
+                    txtValorA.Clear();
+                    txtValorB.Clear();
+                    txtValorC.Clear();
+                    txtTipoTriangulo.Clear();
+                    chkBoxTriangulo.Checked = false;
+                }
+            }
+            catch (FormatException){
+                MessageBox.Show("Informe um valor válido");
+                txtValorA.Clear();
+                txtValorB.Clear();
+                txtValorC.Clear();
+                txtTipoTriangulo.Clear();
+                chkBoxTriangulo.Checked = false;
+            }
+        }
+    }
+}

@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace pMetodos2
+{
+    public partial class frmExercicio2 : Form
+    {
+        public frmExercicio2()
+        {
+            InitializeComponent();
+        }
+
+        private void btnTestar_Click(object sender, EventArgs e)
+        {
+            int aux;
+            if (int.TryParse(txtPalavra1.Text, out aux) || (int.TryParse(txtPalavra2.Text, out aux)) || (txtPalavra1.Text == "") || (txtPalavra2.Text == ""))
+            {
+                MessageBox.Show("Digite uma palavra! ");
+            }
+            else
+            {
+                if (String.Compare(txtPalavra1.Text, txtPalavra2.Text, true) == 0)
+                {
+                    MessageBox.Show("São Iguais");
+                }
+                else
+                {
+                    MessageBox.Show("Não são iguais");
+                }
+            }
+        }
+        
+
+        private void btnInserir1_Click(object sender, EventArgs e)
+        {
+            int aux;
+            if (int.TryParse(txtPalavra1.Text, out aux) || (int.TryParse(txtPalavra2.Text, out aux)) || (txtPalavra1.Text == "") || (txtPalavra2.Text == ""))
+            {
+                MessageBox.Show("Digite uma palavra! ");
+            }
+            else
+            {
+                int meio = txtPalavra2.Text.Length / 2; //divide a palavra no meio
+
+                txtPalavra2.Text = txtPalavra2.Text.Substring(0, meio) +
+                txtPalavra1.Text + txtPalavra2.Text.Substring(meio, txtPalavra2.Text.Length - meio); //insere a palavra no meio
+            }
+        }
+
+        private void btnInserir2_Click(object sender, EventArgs e)
+        {
+            int aux;
+            if (int.TryParse(txtPalavra1.Text, out aux) || (int.TryParse(txtPalavra2.Text, out aux)) || (txtPalavra1.Text == "") || (txtPalavra2.Text == ""))
+            {
+                MessageBox.Show("Digite uma palavra! ");
+            }
+            else
+            {
+                int meio = txtPalavra1.Text.Length / 2;
+                txtPalavra2.Text = txtPalavra1.Text.Insert(meio, "**"); //coloca asteristicos no meio
+            }
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            txtPalavra1.Text = "";
+            txtPalavra2.Text="";
+        }
+    }
+}

@@ -1,0 +1,100 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace PTesteComponentes_LPII
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            listBox1.Items.Add("1");
+            listBox1.Items.Add("2");
+            listBox1.Items.Add("3");
+            listBox1.Items.Add("4");
+            listBox1.Items.Add("5");
+            listBox1.Items.Add("6");
+            listBox1.SelectedIndex = 0; //pre selecionado o primeiro
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "") //se o nome estiver vazio apareca na tela "nome vazio"
+            {
+                MessageBox.Show("Nome vazio");
+            }
+
+            /*if (checkBox1.Checked)  ! negação se fosse para negar
+                MessageBox.Show("É a primeira viagem");
+            else
+                MessageBox.Show("Já viajou com a agência"); (se fosse 2 opções apenas)*/
+
+            if (checkBox1.CheckState == CheckState.Checked)
+            {
+                MessageBox.Show("É a primeira viagem");
+            }
+            else if (checkBox1.CheckState == CheckState.Unchecked)
+            {
+                MessageBox.Show("Já viajou com a agência");
+            }
+            else
+            {
+                MessageBox.Show("Não informou se já viajou com a agência");
+            }
+            if (comboBox1.SelectedIndex == -1) //quanto a seleção de destinos -1 não selecionou nnehum
+            {
+                MessageBox.Show("Não escolheu o destino");
+            }
+            else
+            {
+                MessageBox.Show("Destino: " + comboBox1.SelectedItem);
+            }
+
+            DateTime data;
+
+            if (DateTime.TryParse(maskedTextBox1.Text, out data)) //converter texto em data 
+            {
+                MessageBox.Show("Data de Ida:" + data.ToShortDateString()); //metodo to short para deixar menor a data
+            }
+            else
+            {
+                MessageBox.Show("Data Inválida");
+            }
+            //double, float, 
+            double valor;
+
+            if (double.TryParse(maskedTextBox3.Text, out valor)) //converter texto em data 
+            {
+                MessageBox.Show("Valor" + valor.ToString("N2")); //2 CASAS DECIMAIS
+            }
+            else
+            {
+                MessageBox.Show("Valor Inválido");
+            }
+            /* for (var i = 0; i < checkedListBox1.CheckedItems.Count; i++) //0 primeira posição menor que o total que foi checado
+             {
+                 MessageBox.Show(checkedListBox1.CheckedItems[i].ToString()); //imprimir cada item selecionado
+             } */
+
+            string stringona = " ";
+            for (var i = 0; i < checkedListBox1.CheckedItems.Count; i++)
+            {
+                stringona = stringona + "\n" + checkedListBox1.CheckedItems[i].ToString();
+                //acumulando na variavel
+            }
+                MessageBox.Show(stringona);
+        }
+    }
+}

@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace PTesteEventos
+{
+    public partial class frmBoleto : Form
+    {
+        public frmBoleto()
+        {
+            InitializeComponent();
+        }
+
+        private void txtNome_Leave(object sender, EventArgs e)
+        {
+            MessageBox.Show("Nome perdeu o foco");
+        }
+
+        private void txtEndereco_Enter(object sender, EventArgs e)
+        {
+            MessageBox.Show("Endereço ganhou o foco");
+        }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar==(char)13) //testando se apertou enter com base na tabela ASCII, procura 13 enter e transforma em char
+            {
+                SendKeys.Send("{TAB}");  //envia o tab {}
+                e.Handled = true; //desabilita o beep
+            }
+        }
+
+        private void mskbxData_Validated(object sender, EventArgs e)
+        {
+            DateTime data;
+            if(DateTime.TryParse(mskbxData.Text,out data))
+            {
+                MessageBox.Show("Data ok"); 
+            }
+            else
+            {
+                MessageBox.Show("Data Inválida");
+                mskbxData.Focus();  //foco dentro da  data de novo
+            }
+        }
+
+        private void mskbxValor_Validating(object sender, CancelEventArgs e)
+        {
+            Double valor;
+
+            if(Double.TryParse(mskbxValor.Text,out valor))
+            {
+                MessageBox.Show("Valor Ok!");
+            }
+            else
+            {
+                MessageBox.Show("Valor Inválido");
+                e.Cancel = true;
+            }
+        }
+    }
+}

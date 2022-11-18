@@ -1,0 +1,74 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace PImc
+{
+    public partial class frmCalculoImc : Form
+    {
+        public frmCalculoImc()
+        {
+            InitializeComponent();
+        }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            txtAltura.Clear();
+            txtPeso.Clear();
+            txtClassificacao.Clear();
+            txtImc.Clear();
+        }
+
+        private void btnCalcular_Click(object sender, EventArgs e)
+        {
+            try
+            {
+            double altura, peso, imc;
+            altura = double.Parse(txtAltura.Text);
+            peso = double.Parse(txtPeso.Text);
+            
+                imc = peso / Math.Pow(altura, 2); //faz o calculo
+                imc = Math.Round(imc, 1); //arredonda casas
+                txtImc.Text = imc.ToString("N1");
+
+
+                if (imc < 18.5)
+                {
+                    txtClassificacao.Text = "Magreza";
+                }
+                else if((imc>=18.5) && (imc <= 24.9))
+                {
+                    txtClassificacao.Text = "Normal";
+                }
+                else if ((imc >= 25.0) && (imc <= 29.9))
+                {
+                    txtClassificacao.Text = "Sobrepeso";
+                }
+                else if ((imc >= 30) && (imc <= 39.9))
+                {
+                    txtClassificacao.Text = "Obesidade";
+                }
+                else
+                {
+                    txtClassificacao.Text = "Obesidade Grave";
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Digite um valor válido");
+            }
+           
+        }
+    }
+}

@@ -1,0 +1,152 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Psalario
+{
+    public partial class frmCalculos : Form
+    {
+        public frmCalculos()
+        {
+            InitializeComponent();
+        }
+
+        private void btnVerificaDesconto_Click(object sender, EventArgs e)
+        {
+            double salarioBruto = 0;
+            double salarioFamilia = 0;
+            double salarioLiquido = 0;
+            double descontoINSS = 0;
+            double descontoIRPF = 0;
+            double numeroFilhos = 0;
+
+            try
+            {
+                salarioBruto = Convert.ToDouble(mskbxSalarioBruto.Text);
+                numeroFilhos = Convert.ToDouble(cbxNumeroFilhos.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Deu erro: " + ex.Message);
+                mskbxSalarioBruto.Clear();
+            }
+
+            if (txtNomeFuncionario.Text == String.Empty)
+            {
+                MessageBox.Show("Não pode ser vazio, digite o nome");
+                txtNomeFuncionario.Clear();
+
+            }
+
+            else
+            {
+                if (salarioBruto <= 0)
+                {
+                    MessageBox.Show("O valor do salário tem que ser maior que 0");
+                    mskbxSalarioBruto.Clear();
+                }
+                else
+                {
+                    //Calculo para INSS
+
+                    if (salarioBruto <= 800.47)
+                    {
+                        mskbxINSS.Text = "7.65%";
+                        descontoINSS = (0.0765 * salarioBruto);
+                    }
+                    else if (salarioBruto <= 1050)
+                    {
+                        mskbxINSS.Text = "8.65%";
+                        descontoINSS = (0.0865 * salarioBruto);
+                    }
+                    else if (salarioBruto <= 1400.77)
+                    {
+                        mskbxINSS.Text = "9.00%";
+                        descontoINSS = (0.09 * salarioBruto);
+                    }
+                    else if (salarioBruto <= 2801.56)
+                    {
+                        mskbxINSS.Text = "11.00%";
+                        descontoINSS = (0.11 * salarioBruto);
+                    }
+                    else if (salarioBruto > 2801.56)
+                    {
+                        mskbxINSS.Text = "Teto";
+                        descontoINSS = 308.17;
+                    }
+                    //Cálculo para IRPF
+                    if (salarioBruto <= 1257.12)
+                    {
+                        mskbxIRPF.Text = "Isento";
+                        descontoIRPF = 0;
+                    }
+                    else if (salarioBruto <= 2512.08)
+                    {
+                        mskbxIRPF.Text = "15.00%";
+                        descontoIRPF = ((15.00 / 100) * salarioBruto);
+                    }
+                    else if (salarioBruto > 2512.08)
+                    {
+                        mskbxIRPF.Text = "27.50%";
+                        descontoIRPF = (0.275 * salarioBruto);
+                    }
+                    //Número de filhos
+                    if (numeroFilhos > 0)
+                    {
+                        if (salarioBruto <= 435.52)
+                        {
+                            salarioFamilia = (22.23 * numeroFilhos);
+                        }
+                        else if (salarioBruto <= 654.61)
+                        {
+                            salarioFamilia = (15.74 * numeroFilhos);
+                        }
+                        else
+                        {
+                            salarioFamilia = 0;
+                        }
+                    }
+                    //Exibição dos valores
+                    mskbxSalarioFamilia.Text = salarioFamilia.ToString("N2");
+                    mskbxDescontoINSS.Text = descontoINSS.ToString("N2");
+                    mskbxDescontoIRPF.Text = descontoIRPF.ToString("N2");
+                    salarioLiquido = (salarioBruto - descontoINSS - descontoIRPF + salarioFamilia);
+                    mskbxSalarioLiquido.Text = salarioLiquido.ToString("N2");
+                    if (rbtnCasado.Checked)
+                    {
+                        lblDados.Text = "O funcionário " + txtNomeFuncionario.Text + " que é casado" + " e que tem " + numeroFilhos + " filhos obteve os seguintes descontos: ";
+                    }
+                    else
+                    {
+                        lblDados.Text = " O funcionário " + txtNomeFuncionario.Text + " que é solteiro" + " e que tem " + numeroFilhos + " filhos obteve os seguintes descontos: ";
+                    }
+                }
+            }
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            txtNomeFuncionario.Clear();
+            mskbxINSS.Clear();
+            mskbxIRPF.Clear();
+            mskbxSalarioBruto.Clear();
+            mskbxSalarioFamilia.Clear();
+            mskbxSalarioLiquido.Clear();
+            mskbxDescontoINSS.Clear();
+            mskbxDescontoIRPF.Clear();
+            cbxNumeroFilhos.SelectedIndex = -1;
+            rbtnCasado.Checked = false;
+            lblDados.Text = "";
+        }
+    }
+}
+
+
+
+
