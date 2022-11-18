@@ -1,0 +1,65 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Microsoft.VisualBasic;
+
+namespace EstudoPratica
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string auxiliar;
+            int i;
+            double[] vetorA = new double[10];
+            double[] matrizB = new double[10];
+            double par, impar;
+            string saida="", saida2="";
+
+            for (i = 0; i < vetorA.Length; i++){ 
+            auxiliar = Interaction.InputBox("Digite 10 numeros: " + (i + 1), "Entrada de Dados");
+
+                if (!double.TryParse(auxiliar, out vetorA[i]))
+                {
+                    MessageBox.Show("Digite um valor válido");
+                    i--;
+                }
+                if (i % 2 == 0)
+                {
+                    //par = vetorA[i] * 5;
+                    matrizB[i] = (vetorA[i] * 5);
+                }
+                else
+                {
+                    matrizB[i]= (vetorA[i] + 5);
+
+                }
+                saida += vetorA[i].ToString() + "\n";
+                saida2 +=  matrizB[i].ToString() + "\n";
+                
+            }
+            MessageBox.Show(saida);
+            MessageBox.Show(saida2);
+
+            // foreach (double elemento in vetorA)
+            //{
+            //     MessageBox.Show("Matriz Original" + elemento.ToString());
+            // }
+            // foreach (double elemento in matrizB)
+            // {
+            //    MessageBox.Show("Matriz Nova" + elemento.ToString());
+            // }
+        }
+    }
+}
